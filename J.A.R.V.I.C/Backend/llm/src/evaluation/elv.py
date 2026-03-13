@@ -15,17 +15,12 @@ MAX_LEN = config.get("max_seq_len", 32)
 def evaluate(model_path, tokenizer_path):
     # Load tokenizer
     tokenizer = load_tokenizer(tokenizer_path)
-
-    # Load validation data
     _, val_texts, _, val_labels = get_train_val_split(test_size=config.get("train_val_split_ratio", 0.1))
     
     X_val = encode_texts(tokenizer, val_texts, max_len=MAX_LEN)
     y_val = torch.tensor(val_labels)
-    
     val_dataset = TensorDataset(X_val, y_val)
     val_loader = DataLoader(val_dataset, batch_size=config.get("batch_size", 16))
-
-    # Load model
     transformer = SimpleTransformer(
         vocab_size=tokenizer.get_vocab_size(),
         embed_dim=config.get("embed_dim", 64),
@@ -38,8 +33,6 @@ def evaluate(model_path, tokenizer_path):
     model = load_model(model, model_path, device=DEVICE)
     model.to(DEVICE)
     model.eval()
-
-    # Predict
     all_preds = []
     all_labels = []
     with torch.no_grad():
@@ -49,8 +42,6 @@ def evaluate(model_path, tokenizer_path):
             preds = torch.argmax(logits, dim=-1)
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(y_batch.cpu().numpy())
-    
-    # Compute metrics
     metrics = compute_metrics(all_labels, all_preds)
     print("Evaluation Results:")
     print(f"Accuracy: {metrics['accuracy']:.4f}")
