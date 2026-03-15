@@ -5,7 +5,7 @@ learning_rate: 0.001
 max_seq_len: 32
 
 # Model architecture
-embed_dim: 64          # Embedding dimension
+embed_dim: 64          
 num_heads: 4           # Number of attention heads
 ff_hidden: 128         # Feedforward hidden size
 num_layers: 2          # Number of transformer blocks

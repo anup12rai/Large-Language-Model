@@ -39,8 +39,6 @@ class QueryPredictor:
             pred_idx = torch.argmax(logits, dim=-1).item()
         return LABELS[pred_idx]
 
-
-# Example usage:
 if __name__ == "__main__":
     predictor = QueryPredictor(model_path="../model.pt", tokenizer_path="../data/processed/tokenizer.json")
     

@@ -1,15 +1,19 @@
-from src.inference.pipeline import classify_query
+import sys
+import os
 
-def main():
-    print("=== Query Classifier LLM ===")
-    print("Type 'exit' to quit.\n")
-    
-    while True:
-        user_input = input("User: ").strip()
-        if user_input.lower() == "exit":
-            break
-        label = classify_query(user_input)
-        print(f"Bot: {label}\n")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+print("Query Type Detector Started")
+print("Type 'exit' to stop\n")
 
-if __name__ == "__main__":
-    main()
+while True:
+
+    user_input = input("User: ")
+
+    if user_input.lower() == "exit":
+        break
+
+    result = classify_query(user_input)
+
+    print("Bot:", result)
+
+print("Query Type Detector Stopped")

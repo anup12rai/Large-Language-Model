@@ -1,0 +1,6 @@
+turn on fan
+turn off light
+open door
+close window
+start motor
+stop pump
