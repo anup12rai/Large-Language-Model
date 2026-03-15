@@ -1,7 +1,10 @@
 import sys
 import os
+from llm.src.interface.pipeline import classify_query
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
+
 print("Query Type Detector Started")
 print("Type 'exit' to stop\n")
 

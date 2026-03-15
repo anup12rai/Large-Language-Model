@@ -1,21 +1,29 @@
+import sys
+import os
+
+# Make src visible to Python
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC_PATH = os.path.join(BASE_DIR)
+sys.path.insert(0, SRC_PATH)
+
 import yaml
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 
-from src.preprocessing.datasets import get_train_val_split
-from src.preprocessing.tokenizer import load_tokenizer
-from src.preprocessing.encode_data import encode_texts
-from src.model.transformer import SimpleTransformer
-from src.model.classifier import QueryClassifier
-from src.model.model_utils import save_model
-from src.utils.constants import LABELS
+from preprocessing.datasets import get_train_val_split
+from preprocessing.tokenizer import load_tokenizer
+from preprocessing.encode_data import encode_texts
+from model.transformer import SimpleTransformer
+from model.classifier import QueryClassifier
+from model.model_utils import save_model
+from utils.constants import LABELS
 
 # -------------------------------
 # Load config.yaml
 # -------------------------------
-with open("src/training/config.yaml") as f:
+with open("config.yaml") as f:
     config = yaml.safe_load(f)
 
 BATCH_SIZE = config["batch_size"]
@@ -57,7 +65,6 @@ def prepare_dataloader():
 def train():
     train_loader, val_loader, tokenizer = prepare_dataloader()
 
-    # Initialize model
     transformer = SimpleTransformer(
         vocab_size=tokenizer.get_vocab_size(),
         embed_dim=EMBED_DIM,
@@ -99,12 +106,8 @@ def train():
 
         print(f"Epoch [{epoch+1}/{EPOCHS}] - Loss: {avg_loss:.4f} - Val Accuracy: {val_acc:.4f}")
 
-    # Save model
     save_model(model, MODEL_PATH)
     print(f"Model saved at {MODEL_PATH}")
 
-# -------------------------------
-# Run training
-# -------------------------------
 if __name__ == "__main__":
     train()
