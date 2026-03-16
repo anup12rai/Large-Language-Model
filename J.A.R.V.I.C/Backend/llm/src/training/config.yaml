@@ -6,16 +6,13 @@ max_seq_len: 32
 
 # Model architecture
 embed_dim: 64          
-num_heads: 4           # Number of attention heads
-ff_hidden: 128         # Feedforward hidden size
-num_layers: 2          # Number of transformer blocks
+num_heads: 4           
+ff_hidden: 128         
+num_layers: 2          
 
-# Dataset settings
 train_val_split_ratio: 0.1
 tokenizer_path: "../data/processed/tokenizer.json"
 
-# Device settings
-device: "cuda"         # or "cpu"
+device: "cuda"         
 
-# Saving
 model_save_path: "../model.pt"
