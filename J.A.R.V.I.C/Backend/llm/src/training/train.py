@@ -1,7 +1,5 @@
 import sys
 import os
-
-# Make src visible to Python
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC_PATH = os.path.join(BASE_DIR)
 sys.path.insert(0, SRC_PATH)
@@ -19,10 +17,6 @@ from model.transformer import SimpleTransformer
 from model.classifier import QueryClassifier
 from model.model_utils import save_model
 from utils.constants import LABELS
-
-# -------------------------------
-# Load config.yaml
-# -------------------------------
 with open("config.yaml") as f:
     config = yaml.safe_load(f)
 
@@ -40,9 +34,6 @@ NUM_LAYERS = config["num_layers"]
 
 TOKENIZER_PATH = config["tokenizer_path"]
 
-# -------------------------------
-# Prepare dataloaders
-# -------------------------------
 def prepare_dataloader():
     train_texts, val_texts, train_labels, val_labels = get_train_val_split(test_size=config["train_val_split_ratio"])
     tokenizer = load_tokenizer(TOKENIZER_PATH)
