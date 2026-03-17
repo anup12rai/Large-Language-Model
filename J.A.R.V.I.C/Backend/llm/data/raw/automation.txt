@@ -4,3 +4,5 @@ open door
 close window
 start motor
 stop pump
+turn on the led 
+turn on the light
