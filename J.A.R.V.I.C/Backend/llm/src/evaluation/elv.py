@@ -1,13 +1,13 @@
 import torch
 from torch.utils.data import DataLoader, TensorDataset
-from src.preprocessing.datasets import get_train_val_split
+from src.preprocessing.datasets import get_train_val_split # pyright: ignore[reportMissingImports]
 from src.preprocessing.tokenizer import load_tokenizer
 from src.preprocessing.encode_data import encode_texts
 from src.model.transformer import SimpleTransformer
 from src.model.classifier import QueryClassifier
 from src.model.model_utils import load_model
 from src.evaluation.metrics import compute_metrics
-from src.training.config import config
+from src.training.config import config # type: ignore
 
 DEVICE = config.get("device", "cuda" if torch.cuda.is_available() else "cpu")
 MAX_LEN = config.get("max_seq_len", 32)
