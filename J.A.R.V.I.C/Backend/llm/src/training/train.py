@@ -50,9 +50,6 @@ def prepare_dataloader():
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)
     return train_loader, val_loader, tokenizer
 
-# -------------------------------
-# Training function
-# -------------------------------
 def train():
     train_loader, val_loader, tokenizer = prepare_dataloader()
 

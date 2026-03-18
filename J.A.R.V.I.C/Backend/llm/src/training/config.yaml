@@ -1,8 +1,7 @@
 # Training hyperparameters
-batch_size: 16
-epochs: 10
+batch_size: 32
 learning_rate: 0.001
-max_seq_len: 32
+epochs: 10
 
 # Model architecture
 embed_dim: 64          
